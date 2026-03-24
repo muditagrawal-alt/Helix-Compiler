@@ -103,20 +103,20 @@ void lexer(char code[]) {
 }
 
 // ---------- HX EXTENSION CHECK ----------
-int has_hx_extension(const char *filename) {
+int has_hxi_extension(const char *filename) {
     const char *dot = strrchr(filename, '.');
     if (!dot || dot == filename)
         return 0;
-    return strcmp(dot, ".hx") == 0;
+    return strcmp(dot, ".hxi") == 0;
 }
 
 // ---------- MAIN ----------
 int main() {
-    const char *filename = "test.hx";   // Helix source file
+    const char *filename = "test.hxi";   // Helix source file
     FILE *fp = fopen(filename, "r");
 
-    if (!has_hx_extension(filename)) {
-        printf("Error: Helix source file must have .hx extension\n");
+    if (!has_hxi_extension(filename)) {
+        printf("Error: Helix source file must have .hxi extension\n");
         return 1;
     }
 
