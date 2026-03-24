@@ -10,3 +10,6 @@ parser
 
 # temp files
 *.log
+
+.vscode/
+hello.dSYM/
