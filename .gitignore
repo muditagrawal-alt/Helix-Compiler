@@ -1,0 +1,12 @@
+# Compiled files
+*.o
+*.out
+*.exe
+lexer
+parser
+
+# macOS
+.DS_Store
+
+# temp files
+*.log
