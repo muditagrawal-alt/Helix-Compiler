@@ -292,30 +292,4 @@ Contributions are welcome! Here's how you can help:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🎓 Educational Purpose
 
-This compiler is designed as an educational tool for understanding:
-- Compiler design principles
-- Phases of compilation
-- Abstract Syntax Trees
-- Intermediate representations
-- Code optimization techniques
-
-It's ideal for students learning about compilers, programming language theory, or anyone interested in understanding how code is transformed from high-level source to executable form.
-
-## 📧 Contact
-
-**Mudit Agrawal**  
-GitHub: [@muditagrawal-alt](https://github.com/muditagrawal-alt)
-
-## 🙏 Acknowledgments
-
-- Inspired by classic compiler design textbooks (Dragon Book, Tiger Book)
-- Built as a learning project to understand compiler internals
-- Special thanks to the open-source community
-
----
-
-**Happy Compiling! 🎉**
-
-<sub>Built with ❤️ for the compiler community</sub>
