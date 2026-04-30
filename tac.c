@@ -11,6 +11,7 @@ typedef struct Node {
     char value;
     struct Node* left;
     struct Node* right;
+
 } Node;
 
 // TAC STORAGE
