@@ -6,24 +6,24 @@
 char input[100];
 int pos = 0;
 
-// ---------- AST NODE ----------
+// AST NODE
 typedef struct Node {
     char value;
     struct Node* left;
     struct Node* right;
 } Node;
 
-// ---------- TAC STORAGE ----------
+// TAC STORAGE
 char tac[100][50];
 int tacIndex = 0;
 int tempCount = 0;
 
-// ---------- FUNCTION DECLARATIONS ----------
+//FUNCTION DECLARATIONS
 Node* E();
 Node* T();
 Node* F();
 
-// ---------- CREATE AST NODE ----------
+//CREATE AST NODE
 Node* createNode(char value, Node* left, Node* right) {
     Node* node = (Node*)malloc(sizeof(Node));
     node->value = value;
@@ -32,7 +32,7 @@ Node* createNode(char value, Node* left, Node* right) {
     return node;
 }
 
-// ---------- TEMPORARY VARIABLE GENERATOR ----------
+//TEMPORARY VARIABLE GENERATOR
 char* newTemp() {
     static char temp[10];
     sprintf(temp, "t%d", ++tempCount);
@@ -42,7 +42,7 @@ char* newTemp() {
     return result;
 }
 
-// ---------- F -> (E) | digit ----------
+//F -> (E) | digit
 Node* F() {
     Node* node = NULL;
 
@@ -68,7 +68,7 @@ Node* F() {
     return node;
 }
 
-// ---------- T -> F * F ----------
+//T -> F * F
 Node* T() {
     Node* left = F();
 
@@ -83,7 +83,7 @@ Node* T() {
     return left;
 }
 
-// ---------- E -> T + T ----------
+//E -> T + T
 Node* E() {
     Node* left = T();
 
@@ -98,7 +98,7 @@ Node* E() {
     return left;
 }
 
-// ---------- GENERATE THREE ADDRESS CODE ----------
+//GENERATE THREE ADDRESS CODE
 char* generateTAC(Node* node) {
     if (node == NULL)
         return NULL;
@@ -123,7 +123,7 @@ char* generateTAC(Node* node) {
     return temp;
 }
 
-// ---------- PRINT TAC ----------
+//PRINT TAC
 void printTAC() {
     printf("\n--- Three Address Code ---\n");
 
@@ -132,13 +132,13 @@ void printTAC() {
     }
 }
 
-// ---------- RESET TAC ----------
+//RESET TAC
 void resetTAC() {
     tacIndex = 0;
     tempCount = 0;
 }
 
-// ---------- MAIN ----------
+//MAIN
 int main() {
     printf("Enter expression (e.g., 2*3+4): ");
     scanf("%s", input);
