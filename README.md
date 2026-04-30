@@ -237,30 +237,6 @@ t2 = t1      // Reuses t1 instead of recalculating 5*6
 t3 = t1 + t2
 ```
 
-## 🎯 Roadmap
-
-### Planned Features
-- [ ] Variable declarations and assignments
-- [ ] Control flow structures (`if`, `while`, `for`)
-- [ ] Function definitions and calls
-- [ ] Array support
-- [ ] Type checking and semantic analysis
-- [ ] Symbol table implementation
-- [ ] Machine code generation (x86-64 assembly)
-- [ ] More sophisticated optimizations (constant folding, dead code elimination)
-- [ ] Error reporting with line numbers and helpful messages
-- [ ] Support for floating-point arithmetic
-- [ ] String literals and operations
-- [ ] Standard library functions
-
-### Long-term Vision
-- Multi-file compilation and linking
-- Preprocessor directives
-- Struct/record types
-- Pointer arithmetic
-- Module system
-- LLVM backend integration
-
 ## 🧪 Testing
 
 Create your own test files with the `.hxi` extension:
