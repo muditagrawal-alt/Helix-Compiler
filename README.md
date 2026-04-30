@@ -248,22 +248,6 @@ echo "10+20*3;" > mytest.hxi
 
 **Note**: Currently, only arithmetic expressions are fully supported. Other language constructs will be recognized during lexing but may not be processed in later stages.
 
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-- Follow the existing code style
-- Add comments for complex logic
-- Test with various input expressions
-- Update documentation for new features
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
