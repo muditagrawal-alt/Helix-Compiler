@@ -42,9 +42,19 @@ int F() {
 int T() {
     int value = F();
 
-    while (input[pos] == '*') {
-        pos++;  // skip '*'
-        value *= F();
+    while (input[pos] == '*' || input[pos] == '/') {
+        char op = input[pos++];
+
+        if (op == '*')
+            value *= F();
+        else {
+            int divisor = F();
+            if (divisor == 0) {
+                printf("Error: Division by zero\n");
+                return 0;
+            }
+            value /= divisor;
+        }
     }
 
     return value;
@@ -54,9 +64,13 @@ int T() {
 int E() {
     int value = T();
 
-    while (input[pos] == '+') {
-        pos++;  // skip '+'
-        value += T();
+    while (input[pos] == '+' || input[pos] == '-') {
+        char op = input[pos++];
+
+        if (op == '+')
+            value += T();
+        else
+            value -= T();
     }
 
     return value;

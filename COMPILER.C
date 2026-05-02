@@ -38,12 +38,17 @@ int is_multi_operator(char *str) {
 
 int is_number_token(char str[]) {
     int i = 0;
-    if (str[0] == '-') i = 1;
-    if (str[i] == '\0') return 0;
+
+    if (str[0] == '-')
+        i = 1;
+
+    if (str[i] == '\0')
+        return 0;
 
     for (; str[i] != '\0'; i++)
         if (!isdigit(str[i]))
             return 0;
+
     return 1;
 }
 
@@ -67,6 +72,7 @@ void lexer(char code[]) {
 
         if (code[i] && code[i + 1]) {
             char op[3] = {code[i], code[i + 1], '\0'};
+
             if (is_multi_operator(op)) {
                 printf("Token: %s -> OPERATOR\n", op);
                 i += 2;
@@ -81,9 +87,11 @@ void lexer(char code[]) {
         }
 
         int t = 0;
+
         while (code[i] && !isspace(code[i]) && !is_single_operator(code[i])) {
             token[t++] = code[i++];
         }
+
         token[t] = '\0';
 
         if (is_keyword(token))
@@ -97,8 +105,10 @@ void lexer(char code[]) {
 
 int has_hxi_extension(const char *filename) {
     const char *dot = strrchr(filename, '.');
+
     if (!dot || dot == filename)
         return 0;
+
     return strcmp(dot, ".hxi") == 0;
 }
 
@@ -121,9 +131,11 @@ Node* F();
 
 Node* createNode(char value, Node* left, Node* right) {
     Node* node = (Node*)malloc(sizeof(Node));
+
     node->value = value;
     node->left = left;
     node->right = right;
+
     return node;
 }
 
@@ -154,9 +166,10 @@ Node* F() {
 Node* T() {
     Node* left = F();
 
-    while (expression[pos] == '*') {
+    while (expression[pos] == '*' || expression[pos] == '/') {
         char op = expression[pos++];
         Node* right = F();
+
         left = createNode(op, left, right);
     }
 
@@ -166,9 +179,10 @@ Node* T() {
 Node* E() {
     Node* left = T();
 
-    while (expression[pos] == '+') {
+    while (expression[pos] == '+' || expression[pos] == '-') {
         char op = expression[pos++];
         Node* right = T();
+
         left = createNode(op, left, right);
     }
 
@@ -187,18 +201,33 @@ int evaluateAST(Node* node) {
 
     if (node->value == '+')
         return left + right;
+
+    if (node->value == '-')
+        return left - right;
+
     if (node->value == '*')
         return left * right;
+
+    if (node->value == '/') {
+        if (right == 0) {
+            printf("Error: Division by zero\n");
+            return 0;
+        }
+
+        return left / right;
+    }
 
     return 0;
 }
 
 char* newTemp() {
     char temp[10];
+
     sprintf(temp, "t%d", ++tempCount);
 
     char* result = (char*)malloc(strlen(temp) + 1);
     strcpy(result, temp);
+
     return result;
 }
 
@@ -208,8 +237,10 @@ char* generateTAC(Node* node) {
 
     if (node->left == NULL && node->right == NULL) {
         char* value = (char*)malloc(2);
+
         value[0] = node->value;
         value[1] = '\0';
+
         return value;
     }
 
@@ -224,6 +255,7 @@ char* generateTAC(Node* node) {
 
 void printTAC() {
     printf("\n--- THREE ADDRESS CODE ---\n");
+
     for (int i = 0; i < tacIndex; i++) {
         printf("%s\n", tac[i]);
     }
@@ -243,15 +275,15 @@ void optimizeTAC(char tac[][50], int tacIndex) {
 
     for (int i = 0; i < tacIndex; i++) {
         char lhs[10], op1[10], op2[10];
-        char operator;
+        char op;
 
-        if (sscanf(tac[i], "%s = %s %c %s", lhs, op1, &operator, op2) != 4) {
+        if (sscanf(tac[i], "%s = %s %c %s", lhs, op1, &op, op2) != 4) {
             printf("Invalid TAC skipped: %s\n", tac[i]);
             continue;
         }
 
         char currentExpr[50];
-        sprintf(currentExpr, "%s %c %s", op1, operator, op2);
+        sprintf(currentExpr, "%s %c %s", op1, op, op2);
 
         int found = -1;
 
@@ -264,7 +296,8 @@ void optimizeTAC(char tac[][50], int tacIndex) {
 
         if (found != -1) {
             printf("%s = %s\n", lhs, result[found]);
-        } else {
+        }
+        else {
             strcpy(expr[exprCount], currentExpr);
             strcpy(result[exprCount], lhs);
             exprCount++;
@@ -291,6 +324,7 @@ int readFile(const char *filename, char code[]) {
     }
 
     fclose(fp);
+
     return 1;
 }
 
@@ -298,8 +332,13 @@ void extractExpression(char code[], char expr[]) {
     int j = 0;
 
     for (int i = 0; code[i] != '\0'; i++) {
-        if (isdigit(code[i]) || code[i] == '+' || code[i] == '*' ||
-            code[i] == '(' || code[i] == ')') {
+        if (isdigit(code[i]) ||
+            code[i] == '+' ||
+            code[i] == '-' ||
+            code[i] == '*' ||
+            code[i] == '/' ||
+            code[i] == '(' ||
+            code[i] == ')') {
             expr[j++] = code[i];
         }
         else if (code[i] == ';') {

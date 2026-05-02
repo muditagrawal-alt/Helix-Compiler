@@ -73,7 +73,7 @@ Node* F() {
 Node* T() {
     Node* left = F();
 
-    while (input[pos] == '*') {
+    while (input[pos] == '*' || input[pos] == '/') {
         char op = input[pos];
         pos++;
 
@@ -88,7 +88,7 @@ Node* T() {
 Node* E() {
     Node* left = T();
 
-    while (input[pos] == '+') {
+    while (input[pos] == '+' || input[pos] == '-') {
         char op = input[pos];
         pos++;
 

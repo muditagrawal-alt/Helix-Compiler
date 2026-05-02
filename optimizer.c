@@ -49,8 +49,8 @@ void optimizeTAC(char tac[][50], int tacIndex) {
         }
 
         // Detect invalid expressions like: a*b + d
-        if (strchr(op1, '+') || strchr(op1, '*') ||
-            strchr(op2, '+') || strchr(op2, '*')) {
+        if (strchr(op1, '+') || strchr(op1, '-') || strchr(op1, '*') || strchr(op1, '/') ||
+        strchr(op2, '+') || strchr(op2, '-') || strchr(op2, '*') || strchr(op2, '/')) {
             printf("Invalid TAC (complex expr skipped): %s\n", tac[i]);
             continue;
         }
