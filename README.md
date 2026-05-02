@@ -245,6 +245,24 @@ Create your own test files with the `.hxi` extension:
 echo "10+20*3;" > mytest.hxi
 ./helix mytest.hxi
 ```
+## 🌐 Live Demo (Gradio Deployment)
+
+The Helix Compiler is also deployed online using **Gradio** on Hugging Face Spaces, allowing real-time testing directly in the browser.
+
+🔗 **Try it here:**  
+https://huggingface.co/spaces/muditagrawal03/Helix-Compiler
+
+### How to Use
+
+1. Open the link above  
+2. Enter an arithmetic expression (no need to add `;`)  
+3. Click submit  
+4. View the complete compiler pipeline output:
+   - Tokens (Lexical Analysis)
+   - Parsed Expression
+   - Evaluation Result
+   - Three Address Code (TAC)
+   - Optimized TAC
 
 **Note**: Currently, only arithmetic expressions are fully supported. Other language constructs will be recognized during lexing but may not be processed in later stages.
 
