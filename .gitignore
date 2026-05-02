@@ -4,7 +4,7 @@
 *.exe
 lexer
 parser
-
+venv/
 # macOS
 .DS_Store
 
